@@ -45,3 +45,20 @@ def zstderr(data: List[float]) -> float:
 def zcorr(datax: List[float], datay: List[float]) -> float:
 
     return cov(datax, datay) / (zstddev(datax) * zstddev(datay))
+
+def readDataFiles(file):
+    setA, setB = [], []
+    with open(file) as f:
+        new_line = f.readline()
+        for line in f:
+            row = line.split(',')
+            setA.append(float(row[0]))
+            setB.append(float(row[1]))
+    return setA, setB
+
+def readDataSets(files):
+    data = {}
+    for file in files:
+        csvs = readDataFiles(files)
+        data[file] = csvs
+    return data
